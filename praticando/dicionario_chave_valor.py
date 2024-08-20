@@ -17,6 +17,6 @@ adicionar_chave_valor(dicionario, 'nome3', 'Teste')
 adicionar_chave_valor(dicionario, 'nome4', 'Yasmin')
 
 for chave, valor in dicionario.items():
-    print(chave, valor)
+    print(f'{chave}: {valor}')
 
-print(dicionario.items())
+print(dicionario)
