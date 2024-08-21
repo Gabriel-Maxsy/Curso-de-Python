@@ -1,0 +1,2 @@
+Success: Galaxy S esta ligado (Smartphone)
+Error: iPhone esta desligado (Smartphone)
