@@ -13,4 +13,4 @@
   <li>Projetos</li>
 </ul>
 
-<p>Link para o curso: <a>https://www.udemy.com/course/python-3-do-zero-ao-avancado/?couponCode=SKILLS4SALEB</a></p>
+<p>Link para o curso: <a>https://www.udemy.com/course/python-3-do-zero-ao-avancado/</a></p>
