@@ -8,6 +8,9 @@
 # 🟢 Keyword-Only Arguments (*) - * sozinho ❗️NÃO SUGA❗️ valores.
 # PEP 3102 – Keyword-Only Arguments
 # https://peps.python.org/pep-3102/
+
+# Antes da barra deve ser posicional e não nomeado Ex: soma(1, 2)
+# Depois do * deve ser nomeado e nao posicional Ex: soma(a=1, b=2)
 def soma(a, b, /, *, c, **kwargs):
     print(kwargs)
     print(a + b + c)
