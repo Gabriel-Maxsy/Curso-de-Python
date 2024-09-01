@@ -1,19 +1,27 @@
-class Car:
+class Carrinho:
     def __init__(self):
-        self.products = ['teste1', 'teste2', 'teste3']
+        self.produtos = []
 
-    def print_products(self):
-        i = 1
-        print("Your product's list are: ")
-        for product in self.products:
-            print(f'{i}-{product}')
-            i += 1
+    def total(self):
+        return f'{sum([p.preco for p in self.produtos]):.2f}'
+    
+    def inserir_produto(self, *Produtos):
+        # self._produtos += produtos
+        for p in Produtos:
+            self.produtos.append(p)
 
-    def add_product(self, *products):
-        for p in products:
-            self.products.append(p)
+    def listar_produtos(self):
+        for p in self.produtos:
+            print(p.nome, p.preco)
 
+class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
 
-car1 = Car()
-car1.add_product('mouse', 'lamp', 'lights')
-car1.print_products()
+carrinho = Carrinho()
+p1, p2, p3 = Produto('Mouse', 149.99), Produto('Notbook', 1000.00), Produto('MousePad', 29.99)
+
+carrinho.inserir_produto(p1, p2, p3)
+print(carrinho.total())
+carrinho.listar_produtos()
