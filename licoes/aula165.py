@@ -26,9 +26,9 @@
 
 from datetime import datetime
 
-from dateutil.relativedelta import relativedelta
+from dateutil.relativedelta import relativedelta # type: ignore
 
-valor_total = 1_000_000
+valor_total = 1_000_000 
 data_emprestimo = datetime(2020, 12, 20)
 delta_anos = relativedelta(years=5)
 data_final = data_emprestimo + delta_anos
