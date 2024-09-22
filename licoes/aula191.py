@@ -11,4 +11,4 @@ print(response.status_code) # Responde o status do "servidor/site"
 print(response.headers) # Responde com o cabeçalho do "servidor"
 # print(response.content) # Responde com o conteudo em bytes do servidor
 # print(response.json()) Responderia com os dados que o servidor responder em json (o mais comum em sites externos)
-print(response.text) # Responde com o conteudo em bytes do servidor em si (neste caso de exemplo responderá o html)
+print(response.text) # Responde com o conteudo do servidor em si (neste caso de exemplo responderá o html)
