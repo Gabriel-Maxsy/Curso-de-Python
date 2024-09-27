@@ -5,15 +5,16 @@ from PIL import Image
 
 ROOT_FOLDER = Path(__file__).parent
 
-ORIGINAL = ROOT_FOLDER / 'original.JPEG'
-NEW_IMAGE = ROOT_FOLDER / 'new.JPEG'
+ORIGINAL = ROOT_FOLDER / 'transferir.png'
+NEW_IMAGE = ROOT_FOLDER / 'nova_transferir.png'
 
 pil_image = Image.open(ORIGINAL)
 width, height = pil_image.size
-exif = pil_image.info['exif']
+# exif = pil_image.info['exif']
 # width     new_width
 # height    ??
-new_width = 640
+print(width, height)
+new_width = 120
 new_height = round(height * new_width / width)
 new_image = pil_image.resize(size=(new_width, new_height))
 new_image.save(
