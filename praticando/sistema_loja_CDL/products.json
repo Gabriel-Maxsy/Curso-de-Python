@@ -1,18 +1,14 @@
 [
   {
-    "nome": "Mouse",
-    "preco": 149.99
+    "name": "Mouse",
+    "price": 100,
+    "category": "Electric",
+    "amount": 0
   },
   {
-    "nome": "Notbook",
-    "preco": 1000.0
-  },
-  {
-    "nome": "MousePad",
-    "preco": 29.99
-  },
-  {
-    "nome": "Eletrodo",
-    "preco": 38.99
+    "name": "Eucatex azul",
+    "price": 248.0,
+    "category": "Paints",
+    "amount": 11
   }
 ]

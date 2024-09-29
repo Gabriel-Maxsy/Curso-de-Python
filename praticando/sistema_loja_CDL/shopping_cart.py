@@ -1,26 +1,41 @@
 from product import Product
+import json
+
+DATA_JSON = 'products.json'
+
 class Cart:
     def __init__(self):
         self.products = []
+        self._found_product = False
 
     def total(self):
         return f'{sum([p.price for p in self.products]):.2f}'
     
-    def inserir_produto(self, *Produtos):
-        # self._produtos += produtos
-        for p in Produtos:
-            self.products.append(p)
+    def insert_product(self, product_name: str):
+        with open(DATA_JSON, 'r', encoding='utf-8') as file:
+            products = json.load(file)
 
-    def listar_produtos(self):
+        # self._products += products
+        for p in products:
+
+            if product_name in p['name']:
+                if p['amount'] > 0:
+                    self.products.append(p)
+                    # p -= 1 ATUALIZAR ISTO
+                    self._found_product = True
+                else:
+                    print('Não temos a quantidade de produto que voce deseja')
+                    self._found_product = True
+        
+        if not self._found_product:
+            print('Produto não encontrado')
+
+    def list_products(self):
         for p in self.products:
-            print(p.name, p.price)
+            print(p['name'], p['price'])
 
-carrinho = Cart()
-p1, p2, p3 = Product('Mouse', 149.99), Product('Notbook', 1000.00), Product('MousePad', 29.99)
-p4 = Product('Eletrodo', 38.99)
+if __name__ == '__main__':
+    cart = Cart()
 
-carrinho.inserir_produto(p1, p2, p3)
-print(carrinho.total())
-carrinho.listar_produtos()
-carrinho.inserir_produto(p4)
-carrinho.listar_produtos()
+    cart.insert_product('Mouse')
+    cart.list_products()

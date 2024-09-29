@@ -1,1 +1,2 @@
-from shopping_cart import carrinho
+from shopping_cart import Cart
+import admin
