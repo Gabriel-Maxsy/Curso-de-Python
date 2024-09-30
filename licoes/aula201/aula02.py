@@ -4,7 +4,7 @@
 # PySide6.QtWidgets -> Onde estão os widgets do PySide6
 
 import sys
-from PySide6.QtWidgets import QApplication, QPushButton
+from PySide6.QtWidgets import QApplication, QPushButton #type: ignore
 
 app = QApplication(sys.argv)
 

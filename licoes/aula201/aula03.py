@@ -3,7 +3,7 @@
 # QLayout -> Um widget de layout que recebe outros widgets
 import sys
 
-from PySide6.QtWidgets import QApplication, QGridLayout, QPushButton, QWidget
+from PySide6.QtWidgets import QApplication, QGridLayout, QPushButton, QWidget #type: ignore
 
 app = QApplication(sys.argv)
 
@@ -21,9 +21,11 @@ central_widget = QWidget()
 layout = QGridLayout()
 central_widget.setLayout(layout)
 
+#                                         |expansão de:
+#layout.addWidget(elemneto, linha, coluna,| linha, coluna)               
 layout.addWidget(botao, 1, 1, 1, 1)
 layout.addWidget(botao2, 1, 2, 1, 1)
-layout.addWidget(botao3, 3, 1, 1, 2)
+layout.addWidget(botao3, 2, 1, 1, 2)
 
 central_widget.show()  # Central widget entre na hierarquia e mostre sua janela
 app.exec()  # O loop da aplicação
