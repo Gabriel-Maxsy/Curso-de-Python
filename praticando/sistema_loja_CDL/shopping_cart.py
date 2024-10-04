@@ -19,16 +19,18 @@ class Cart:
         for p in products:
 
             if product_name in p['name']:
+                self._found_product = True
                 if p['amount'] > 0:
                     self.products.append(p)
-                    # p -= 1 ATUALIZAR ISTO
-                    self._found_product = True
+                    # p -= 1 IMPLEMENTAR ISTO
+                    # print(f'Produto encontrado e tem quantidade {self._found_product}')
                 else:
                     print('Não temos a quantidade de produto que voce deseja')
-                    self._found_product = True
         
         if not self._found_product:
             print('Produto não encontrado')
+        
+        self._found_product = False
 
     def list_products(self):
         for p in self.products:
@@ -39,3 +41,4 @@ if __name__ == '__main__':
 
     cart.insert_product('Mouse')
     cart.list_products()
+    cart.insert_product('teclado')
