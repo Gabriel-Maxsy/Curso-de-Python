@@ -1,4 +1,5 @@
 # Trabalhando com classes e herança no PySide6
+# type:ignore
 import sys
 
 from PySide6.QtCore import Slot
