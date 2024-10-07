@@ -1,5 +1,6 @@
-# type:ignore
 import sys
+from display import Display
+from info import Info
 from main_window import MainWindow
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
@@ -14,6 +15,14 @@ if __name__ == '__main__':
     # Define o icone
     icon = QIcon(str(WINDOW_ICON_PATH))
     window.setWindowIcon(icon)
+
+    # Info
+    info = Info('Tem que receber algum texto aqui')
+    window.addToVLayout(info)
+
+    # Display
+    display = Display()
+    window.addToVLayout(display)
 
     # Executa tudo
     window.adjustFixedSize()
