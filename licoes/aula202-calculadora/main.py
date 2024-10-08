@@ -4,12 +4,15 @@ from info import Info
 from main_window import MainWindow
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
+from styles import setupTheme
 from variables import WINDOW_ICON_PATH
 
 if __name__ == '__main__':
 
     # Cria a aplicação
     app = QApplication(sys.argv)
+    # Adicionando tema:
+    setupTheme(app)
     window = MainWindow()
 
     # Define o icone
@@ -17,7 +20,7 @@ if __name__ == '__main__':
     window.setWindowIcon(icon)
 
     # Info
-    info = Info('Tem que receber algum texto aqui')
+    info = Info('Tem que colocar algum texto aqui')
     window.addToVLayout(info)
 
     # Display
