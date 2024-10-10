@@ -1,5 +1,5 @@
 import sys
-from buttons import Button
+from buttons import Button, ButtonsGrid
 from display import Display
 from info import Info
 from main_window import MainWindow
@@ -22,18 +22,15 @@ if __name__ == '__main__':
 
     # Info
     info = Info('Tem que colocar algum texto aqui')
-    window.addToVLayout(info)
+    window.addWidgetToVLayout(info)
 
     # Display
     display = Display()
-    window.addToVLayout(display)
+    window.addWidgetToVLayout(display)
 
-    # Botão
-    button = Button('Texto do botão')
-    window.addToVLayout(button)
-
-    button2 = Button('Texto do botão')
-    window.addToVLayout(button2)
+    # Grid de botões
+    buttonsGrid = ButtonsGrid()
+    window.vLayout.addLayout(buttonsGrid)
 
     # Executa tudo
     window.adjustFixedSize()
