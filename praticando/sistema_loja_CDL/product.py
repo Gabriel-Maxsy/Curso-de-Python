@@ -1,7 +1,9 @@
 import json
 from typing import Literal
+from pathlib import Path
 
-DATA_JSON = 'products.json'
+CAMINHO_RAIZ = Path(__file__).parent
+DATA_JSON = CAMINHO_RAIZ / 'products.json'
 
 categories = Literal['Electric', 'Tools', 'Paints', 'Utilities']
 VALID_CATEGORIES = ['Electric', 'Tools', 'Paints', 'Utilities']

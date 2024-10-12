@@ -1,14 +1,14 @@
 [
   {
-    "name": "Mouse",
-    "price": 100,
-    "category": "Electric",
-    "amount": 1
-  },
-  {
     "name": "Eucatex azul",
     "price": 248.0,
     "category": "Paints",
-    "amount": 11
+    "amount": 1
+  },
+  {
+    "name": "Mouse",
+    "price": 123,
+    "category": "Electric",
+    "amount": 20
   }
 ]

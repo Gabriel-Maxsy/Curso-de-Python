@@ -1,7 +1,9 @@
 from product import Product
 import json
+from pathlib import Path
 
-DATA_JSON = 'products.json'
+CAMINHO_RAIZ = Path(__file__).parent
+DATA_JSON = CAMINHO_RAIZ / 'products.json'
 
 class Cart:
     def __init__(self):
@@ -11,8 +13,8 @@ class Cart:
     def total(self):
         return f'{sum([p.price for p in self.products]):.2f}'
     
-    def insert_product(self, product_name: str):
-        with open(DATA_JSON, 'r', encoding='utf-8') as file:
+    def insert_product(self, product_name: str, amount: int):
+        with open(DATA_JSON, 'r+', encoding='utf-8') as file:
             products = json.load(file)
 
         # self._products += products
@@ -22,7 +24,10 @@ class Cart:
                 self._found_product = True
                 if p['amount'] > 0:
                     self.products.append(p)
-                    # p -= 1 IMPLEMENTAR ISTO
+                    # p['amount'] - amount
+                    # json.dump(p, file, ensure_ascii=False, indent=2) ARRUMAR ISTO!!
+
+                    # p['amount'] - 
                     # print(f'Produto encontrado e tem quantidade {self._found_product}')
                 else:
                     print('Não temos a quantidade de produto que voce deseja')
@@ -39,6 +44,6 @@ class Cart:
 if __name__ == '__main__':
     cart = Cart()
 
-    cart.insert_product('Mouse')
+    cart.insert_product('Mouse', 1)
     cart.list_products()
-    cart.insert_product('teclado')
+    cart.insert_product('teclado', 1)
