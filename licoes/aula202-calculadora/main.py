@@ -1,5 +1,5 @@
 import sys
-from buttons import Button, ButtonsGrid
+from buttons import ButtonsGrid
 from display import Display
 from info import Info
 from main_window import MainWindow
