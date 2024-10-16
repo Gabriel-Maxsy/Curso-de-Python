@@ -1,8 +1,13 @@
+from typing import TYPE_CHECKING
 from PySide6.QtWidgets import QGridLayout, QPushButton
 from variables import MEDIUM_FONT_SIZE
 from utils import isEmpty, isNumOrDot, isValidNumber
 from display import Display
 from PySide6.QtCore import Slot
+
+if TYPE_CHECKING: # Type checking serve para evitar erro de "circular import error"
+    from display import Display
+    from info import Info
 
 # Criando a classe do nosso botão e configurando ele
 
@@ -19,7 +24,9 @@ class Button(QPushButton):
         self.setMinimumSize(75, 75)
 
 class ButtonsGrid(QGridLayout):
-    def __init__(self, display: Display, *args, **kwargs):
+    def __init__(
+            self, display: 'Display', info: 'Info', *args, **kwargs
+    ) -> None:
         super().__init__(*args, **kwargs)
 
         self._gridMask = [
@@ -30,7 +37,18 @@ class ButtonsGrid(QGridLayout):
             ['',  '0', '.', '='],
         ]
         self.display = display
+        self.info = info
+        self._equation = ''
         self._makeGrid()
+
+        @property
+        def equation(self):
+            return self._equation
+        
+        @equation.setter
+        def equation(self, value):
+            self._equation = value
+            self.info.setText(value)
 
     def _makeGrid(self):
         for rowNumber, rowData in enumerate(self._gridMask):
