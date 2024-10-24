@@ -1,15 +1,14 @@
 from typing import TYPE_CHECKING
-from PySide6.QtWidgets import QGridLayout, QPushButton
-from variables import MEDIUM_FONT_SIZE
-from utils import isEmpty, isNumOrDot, isValidNumber
-from display import Display
-from PySide6.QtCore import Slot
 
-if TYPE_CHECKING: # Type checking serve para evitar erro de "circular import error"
+from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QGridLayout, QPushButton
+from utils import isEmpty, isNumOrDot, isValidNumber
+from variables import MEDIUM_FONT_SIZE
+
+if TYPE_CHECKING:
     from display import Display
     from info import Info
 
-# Criando a classe do nosso botão e configurando ele
 
 class Button(QPushButton):
     def __init__(self, *args, **kwargs):
@@ -17,11 +16,11 @@ class Button(QPushButton):
         self.configStyle()
 
     def configStyle(self):
-        # Definindo a fonte especifica para o botão
         font = self.font()
         font.setPixelSize(MEDIUM_FONT_SIZE)
         self.setFont(font)
         self.setMinimumSize(75, 75)
+
 
 class ButtonsGrid(QGridLayout):
     def __init__(
@@ -43,18 +42,18 @@ class ButtonsGrid(QGridLayout):
         self._left = None
         self._right = None
         self._op = None
+
         self.equation = self._equationInitialValue
         self._makeGrid()
 
-        # Tentar entender melhor esses getters e setters!
-        @property
-        def equation(self):
-            return self._equation
-        
-        @equation.setter
-        def equation(self, value):
-            self._equation = value
-            self.info.setText(value)
+    @property
+    def equation(self):
+        return self._equation
+
+    @equation.setter
+    def equation(self, value):
+        self._equation = value
+        self.info.setText(value)
 
     def _makeGrid(self):
         for rowNumber, rowData in enumerate(self._gridMask):
@@ -65,9 +64,7 @@ class ButtonsGrid(QGridLayout):
                     button.setProperty('cssClass', 'specialButton')
                     self._configSpecialButton(button)
 
-                #                      linha,     coluna...(expansão)
                 self.addWidget(button, rowNumber, colNumber)
-                
                 slot = self._makeSlot(self._insertButtonTextToDisplay, button)
                 self._connectButtonClicked(button, slot)
 
@@ -86,16 +83,17 @@ class ButtonsGrid(QGridLayout):
                 self._makeSlot(self._operatorClicked, button)
             )
 
+        if text in '=':
+            self._connectButtonClicked(button, self._eq)
     def _makeSlot(self, func, *args, **kwargs):
-        @Slot(bool)
+        @ Slot(bool)
         def realSlot(_):
             func(*args, **kwargs)
         return realSlot
-    
+
     def _insertButtonTextToDisplay(self, button):
         buttonText = button.text()
-        newDisplayValue = self.display.text() + buttonText 
-        # print(self.display.text())  o "self.display.text" é o texto do display atual
+        newDisplayValue = self.display.text() + buttonText
 
         if not isValidNumber(newDisplayValue):
             return
@@ -113,14 +111,33 @@ class ButtonsGrid(QGridLayout):
         buttonText = button.text()  # +-/* (etc...)
         displayText = self.display.text()  # Deverá ser meu número _left
         self.display.clear()  # Limpa o display
+
         # Se a pessoa clicou no operador sem
         # configurar qualquer número
         if not isValidNumber(displayText) and self._left is None:
             print('Não tem nada para colocar no valor da esquerda')
             return
+
         # Se houver algo no número da esquerda,
         # não fazemos nada. Aguardaremos o número da direita.
         if self._left is None:
             self._left = float(displayText)
+
         self._op = buttonText
         self.equation = f'{self._left} {self._op} ??'
+    def _eq(self):
+        displayText = self.display.text()
+        if not isValidNumber(displayText):
+            print('Sem nada para a direita')
+            return
+        self._right = float(displayText)
+        self.equation = f'{self._left} {self._op} {self._right}'
+        result = 0.0
+        try:
+            result = eval(self.equation)
+        except ZeroDivisionError:
+            print('Zero Division Error')
+        self.display.clear()
+        self.info.setText(f'{self.equation} = {result}')
+        self._left = result
+        self._right = None
