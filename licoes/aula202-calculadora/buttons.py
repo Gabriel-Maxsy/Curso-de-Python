@@ -141,6 +141,7 @@ class ButtonsGrid(QGridLayout):
 
         self._op = buttonText
         self.equation = f'{self._left} {self._op} ??'
+    
     def _eq(self):
         displayText = self.display.text()
 
