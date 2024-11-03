@@ -66,3 +66,6 @@ connection.commit()
 
 cursor.close()
 connection.close()
+
+if __name__ == '__main__':
+    print(sql)
