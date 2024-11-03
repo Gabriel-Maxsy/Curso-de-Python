@@ -13,10 +13,12 @@ cursor = connection.cursor()
 cursor.execute(
     f'DELETE FROM {TABLE_NAME}'
 )
+# Zerando o ID do banco
 cursor.execute(
     f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
 )
 connection.commit()
+
 # Cria a tabela
 cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
@@ -30,12 +32,14 @@ connection.commit()
 
 # Registrar valores nas colunas da tabela
 # CUIDADO: sql injection
-cursor.execute(
+sql = (
     f'INSERT INTO {TABLE_NAME} '
-    '(id, name, weight) '
+    '(name, weight) '
     'VALUES '
-    '(NULL, "Helena", 4), (NULL, "Eduardo", 10)'
+    '(?, ?)'
 )
+cursor.execute(sql, ['Gabriel', 3])
 connection.commit()
+
 cursor.close()
 connection.close()
