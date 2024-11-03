@@ -36,19 +36,32 @@ sql = (
     f'INSERT INTO {TABLE_NAME} '
     '(name, weight) '
     'VALUES '
-    '(?, ?)'
+    '(:name, :weight)'
 )
 
 # cursor.execute(sql, ['Teste', 2])
+# cursor.executemany(
+#     sql,
+#     (
+#         ('Gabriel', 3),
+#         ('Yasmin', 2),
+#         ('etc', 5)
+#     )
+# )
 
+# Usando dicionarios 
+cursor.execute(sql, {'name': 'teste', 'weight': 3})
+
+# Quando usamos executemany sempre será uma lista:
 cursor.executemany(
-    sql,
-    (
-        ('Gabriel', 3),
-        ('Yasmin', 2),
-        ('etc', 5)
-    )
+    sql, 
+    [
+        {'name': 'teste2', 'weight': 4},
+        {'name': 'teste3', 'weight': 2},
+        {'name': 'teste4', 'weight': 1}
+    ]
 )
+
 connection.commit()
 
 cursor.close()
