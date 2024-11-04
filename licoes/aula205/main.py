@@ -21,7 +21,7 @@ connection.commit()
 
 # Cria a tabela
 cursor.execute(
-    f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
+    f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} '
     '('
     'id INTEGER PRIMARY KEY AUTOINCREMENT,'
     'name TEXT,'
@@ -76,6 +76,13 @@ if __name__ == '__main__':
     cursor.execute(
         f'DELETE FROM {TABLE_NAME} '
         'WHERE id = "1"'
+    )
+    connection.commit()
+
+    cursor.execute(
+        f'UPDATE {TABLE_NAME} '
+        'SET name = "teste_final", weight = 70.43 '
+        'WHERE id = 2'
     )
     connection.commit()
 
