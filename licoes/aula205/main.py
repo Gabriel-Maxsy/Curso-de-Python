@@ -62,6 +62,8 @@ cursor.executemany(
     ]
 )
 
+# cursor.execute(f'DROP TABLE IF EXISTS teste') Deletando a tabela teste
+
 connection.commit()
 
 
