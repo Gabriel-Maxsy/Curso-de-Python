@@ -1,6 +1,3 @@
 venv/
 .env
 db.sqlite3
-./mysql_206:/var/lib/mysql
-
-aula206/mysql_206/
