@@ -4,3 +4,7 @@ from django.http import HttpResponse
 def blog(request):
     # Posso fazer o que eu quiser antes da resposta
     return HttpResponse('Blog do app')
+
+def exemplo(request):
+    # Posso fazer o que eu quiser antes da resposta
+    return HttpResponse('exemplo do app')
