@@ -3,12 +3,12 @@
     "name": "Eucatex azul",
     "price": 248.0,
     "category": "Paints",
-    "amount": 1
+    "amount": 5
   },
   {
     "name": "Mouse",
     "price": 123,
     "category": "Electric",
-    "amount": 20
+    "amount": 40
   }
 ]

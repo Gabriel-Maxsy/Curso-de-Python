@@ -47,6 +47,7 @@ class Product:
         with open(DATA_JSON, 'w', encoding='utf8') as file:
             json.dump(_products, file, ensure_ascii=False, indent=2)
 
-# if __name__ == '__main__':
-#     p2 = Product('Eucatex azul', 248.00, 'Paints', 1)
-#     p1 = Product('Mouse', 123,'Electric', 20)
+if __name__ == '__main__':
+    p2 = Product('Eucatex azul', 248.00, 'Paints', 1)
+    p1 = Product('Mouse', 123,'Electric', -20)
+    print('funcionou')

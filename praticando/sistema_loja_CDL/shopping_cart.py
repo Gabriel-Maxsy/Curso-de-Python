@@ -1,49 +1,63 @@
-from product import Product
-import json
 from pathlib import Path
+import json
 
 CAMINHO_RAIZ = Path(__file__).parent
 DATA_JSON = CAMINHO_RAIZ / 'products.json'
 
 class Cart:
     def __init__(self):
-        self.products = []
-        self._found_product = False
+        self.products = []  # Produtos no carrinho
 
     def total(self):
-        return f'{sum([p.price for p in self.products]):.2f}'
-    
+        """Calcula o valor total do carrinho."""
+        return f'{sum([p["price"] for p in self.products]):.2f}'
+
     def insert_product(self, product_name: str, amount: int):
+        """Insere um produto no carrinho se ele existir no estoque."""
+        if amount <= 0:
+            print("Quantidade inválida.")
+            return
+
         with open(DATA_JSON, 'r+', encoding='utf-8') as file:
             products = json.load(file)
 
-        # self._products += products
-        for p in products:
+            for p in products:
+                if p['name'].lower() == product_name.lower():  # Ignora maiúsculas/minúsculas
+                    if p['amount'] >= amount:
+                        # Adiciona ao carrinho
+                        for _ in range(amount):
+                            self.products.append({"name": p["name"], "price": p["price"]})
+                        # Reduz a quantidade no estoque
+                        p['amount'] -= amount
+                        print(f'{amount} unidade(s) de {p["name"]} adicionada(s) ao carrinho.')
 
-            if product_name in p['name']:
-                self._found_product = True
-                if p['amount'] > 0:
-                    self.products.append(p)
-                    # p['amount'] - amount
-                    # json.dump(p, file, ensure_ascii=False, indent=2) ARRUMAR ISTO!!
+                        # Atualiza o estoque no arquivo JSON
+                        file.seek(0)
+                        json.dump(products, file, ensure_ascii=False, indent=2)
+                        file.truncate()
+                        return
+                    else:
+                        print("Estoque insuficiente.")
+                        return
 
-                    # p['amount'] - 
-                    # print(f'Produto encontrado e tem quantidade {self._found_product}')
-                else:
-                    print('Não temos a quantidade de produto que voce deseja')
-        
-        if not self._found_product:
-            print('Produto não encontrado')
-        
-        self._found_product = False
+            print("Produto não encontrado.")
 
     def list_products(self):
+        """Lista os produtos no carrinho."""
+        if not self.products:
+            print("Carrinho vazio.")
+            return
+
+        print("Produtos no carrinho:")
         for p in self.products:
-            print(p['name'], p['price'])
+            print(f'{p["name"]} - R$ {p["price"]:.2f}')
+        print(f"Total: R$ {self.total()}")
 
 if __name__ == '__main__':
     cart = Cart()
 
-    cart.insert_product('Mouse', 1)
+    # Testando o carrinho
+    cart.insert_product('Mouse', 2)
     cart.list_products()
-    cart.insert_product('teclado', 1)
+    cart.insert_product('Teclado', 1)
+    cart.list_products()
